@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - 2181:2181
+    networks:
+      backend:
+        aliases:
+          - zookeeper
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+    networks:
+      backend:
+        aliases:
+          - kafka
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      backend:
+        aliases:
+          - redis
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: app
+    ports:
+      - "8080:8080"
+    networks:
+      backend:
+        aliases:
+          - app
+
+networks:
+  backend:
