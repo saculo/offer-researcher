@@ -1,11 +1,14 @@
-package com.saculo.researcher.offer.infrastructure.adapters
+package com.saculo.researcher.offer.infrastructure.adapters.crawler
 
-import com.saculo.researcher.offer.domain.Offer
+import com.saculo.researcher.offer.domain.model.Offer
 import com.saculo.researcher.offer.domain.ports.Crawler
 import org.jsoup.nodes.Element
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class PepperCrawler(private val connector: Connector) : Crawler {
     private val URL: String = "https://www.pepper.pl/grupa/telefony-i-smartfony"
+    val logger: Logger = LoggerFactory.getLogger(PepperCrawler::class.java)
 
     override fun extractOffers(): List<Offer> = getDocument()
             ?.map { offer -> extractOffer(offer) }
@@ -17,7 +20,7 @@ class PepperCrawler(private val connector: Connector) : Crawler {
         val price = extractPrice(offer)
         val recentPrice = extractRecentPrice(offer)
         val discount = extractDiscountAmount(offer)
-
+        logger.debug("x))))))))")
         return Offer(url, title, price, recentPrice, discount)
     }
 

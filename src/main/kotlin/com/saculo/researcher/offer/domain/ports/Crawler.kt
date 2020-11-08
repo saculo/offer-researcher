@@ -1,6 +1,6 @@
 package com.saculo.researcher.offer.domain.ports
 
-import com.saculo.researcher.offer.domain.Offer
+import com.saculo.researcher.offer.domain.model.Offer
 import org.jsoup.nodes.Element
 
 interface Crawler {

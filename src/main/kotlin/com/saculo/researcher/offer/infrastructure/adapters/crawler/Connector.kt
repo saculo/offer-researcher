@@ -1,4 +1,4 @@
-package com.saculo.researcher.offer.infrastructure.adapters
+package com.saculo.researcher.offer.infrastructure.adapters.crawler
 
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
